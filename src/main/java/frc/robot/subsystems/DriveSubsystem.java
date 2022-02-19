@@ -20,7 +20,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   private MotorControllerGroup leftMotorControllerGroup = new MotorControllerGroup(leftMotorController1, leftMotorController2);
   private MotorControllerGroup rightMotorControllerGroup = new MotorControllerGroup(rightMotorController1, rightMotorController2);
-   
+  private DifferentialDrive m_DifferentialDrive = new DifferentialDrive(leftMotorControllerGroup, rightMotorControllerGroup);
   
   public DriveSubsystem() {}
 
@@ -32,5 +32,10 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  //an accessor method to m_differntialDrive
+  public void activateDifferentialDrive(double speed, double rotation){
+    m_DifferentialDrive.arcadeDrive(speed,rotation);
   }
 }
