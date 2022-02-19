@@ -12,6 +12,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,9 +28,13 @@ public class RobotContainer {
   // The robot's subsystems
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveSubsystem m_DriveSubsystem = new DriveSubsystem();  
+
   // The robot's commands
   //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final CommandBase m_autoCommand = new TeleopDrive(m_DriveSubsystem, 0.5, 0.0);
+
+  // The robot's controller
+  private final XboxController m_controller = new XboxController(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   private RobotContainer() {
@@ -47,7 +52,18 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    JoystickButton a = new JoystickButton(m_controller, 0);
+    JoystickButton s = new JoystickButton(m_controller, 1);
+    JoystickButton d = new JoystickButton(m_controller, 2);
+    JoystickButton w = new JoystickButton(m_controller, 3);
+    
+    a.whileHeld(new TeleopDrive(m_DriveSubsystem, 0, 0.5));
+    s.whileHeld(new TeleopDrive(m_DriveSubsystem, -0.5, 0));
+    d.whileHeld(new TeleopDrive(m_DriveSubsystem, 0, -0.5));
+    w.whileHeld(new TeleopDrive(m_DriveSubsystem, 0.5, 0));
+  
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
