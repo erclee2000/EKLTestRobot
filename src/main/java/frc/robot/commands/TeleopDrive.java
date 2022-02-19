@@ -38,7 +38,7 @@ public class TeleopDrive extends CommandBase {
   @Override
   public void execute() {
     m_subsystem.activateDifferentialDrive(m_speed, m_rotation);
-    //System.out.println("executing activateDifferentialDrive");
+    System.out.println("executing activateDifferentialDrive");
   }
 
   // Called once the command ends or is interrupted.
@@ -51,4 +51,3 @@ public class TeleopDrive extends CommandBase {
     return false;
   }
 }
-//testing github rollback
