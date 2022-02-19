@@ -3,16 +3,19 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
-import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PS4Controller;
+//controller
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.TeleopDrive;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
+//subsystem
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
+
+//commands
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.TeleopDrive;
+import frc.robot.commands.TeleopDriveDubSup;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,20 +29,22 @@ public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
   
   // The robot's subsystems
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveSubsystem m_DriveSubsystem = new DriveSubsystem();  
 
   // The robot's commands
-  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final CommandBase m_autoCommand = new TeleopDrive(m_DriveSubsystem, 0.5, 0.0);
+  private final CommandBase m_autoCommand = new TeleopDrive(m_DriveSubsystem, 0.21, 0.11);
 
   // The robot's controller
-  private final XboxController m_controller = new XboxController(0);
+  private final PS4Controller m_controller = new PS4Controller(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   private RobotContainer() {
+    //set each subsystem's default command
+    m_DriveSubsystem.setDefaultCommand(new TeleopDriveDubSup(m_DriveSubsystem, m_controller::getLeftY, m_controller::getLeftX));
+
     // Configure the button bindings
-    configureButtonBindings();
+    //configureButtonBindings();
   }
 
   /** because its a singleton */
@@ -53,16 +58,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton a = new JoystickButton(m_controller, 0);
-    JoystickButton s = new JoystickButton(m_controller, 1);
-    JoystickButton d = new JoystickButton(m_controller, 2);
-    JoystickButton w = new JoystickButton(m_controller, 3);
     
-    a.whileHeld(new TeleopDrive(m_DriveSubsystem, 0, 0.5));
-    s.whileHeld(new TeleopDrive(m_DriveSubsystem, -0.5, 0));
-    d.whileHeld(new TeleopDrive(m_DriveSubsystem, 0, -0.5));
-    w.whileHeld(new TeleopDrive(m_DriveSubsystem, 0.5, 0));
-  
+    JoystickButton square = new JoystickButton(m_controller, 1);
+    
+    square.whenPressed(new TeleopDrive(m_DriveSubsystem, 0, 0.41));
   }
 
   /**
