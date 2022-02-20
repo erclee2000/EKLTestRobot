@@ -63,8 +63,12 @@ public class RobotContainer {
     JoystickButton square = new JoystickButton(m_controller, 1);
     square.whileHeld(new TeleopDriveForever(m_driveSubsystem, 0.41, 0.41));
 
+    JoystickButton circle = new JoystickButton(m_controller, 3);
+    circle.whenHeld(new TeleopDriveForever(m_driveSubsystem, 0.61, 0.61));
+
     JoystickButton cross = new JoystickButton(m_controller, 2);
     cross.whenPressed(new TeleopDriveCheckButton(m_driveSubsystem, 0.81, 0.81));
+    
   }
 
   /**
