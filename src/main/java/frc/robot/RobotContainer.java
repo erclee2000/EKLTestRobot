@@ -14,8 +14,9 @@ import frc.robot.subsystems.DriveSubsystem;
 //commands
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.commands.TeleopDrive;
 import frc.robot.commands.TeleopDriveDubSup;
+import frc.robot.commands.TeleopDriveCheckButton;
+import frc.robot.commands.TeleopDriveForever;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,10 +31,10 @@ public class RobotContainer {
   
   // The robot's subsystems
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final DriveSubsystem m_DriveSubsystem = new DriveSubsystem();  
+  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();  
 
   // The robot's commands
-  private final CommandBase m_autoCommand = new TeleopDrive(m_DriveSubsystem, 0.21, 0.11);
+  private final CommandBase m_autoCommand = new TeleopDriveForever(m_driveSubsystem, 0.11, 0.11);
 
   // The robot's controller
   private final PS4Controller m_controller = new PS4Controller(0);
@@ -41,10 +42,10 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   private RobotContainer() {
     //set each subsystem's default command
-    m_DriveSubsystem.setDefaultCommand(new TeleopDriveDubSup(m_DriveSubsystem, m_controller::getLeftY, m_controller::getLeftX));
+    m_driveSubsystem.setDefaultCommand(new TeleopDriveDubSup(m_driveSubsystem, m_controller::getLeftY, m_controller::getLeftX));
 
     // Configure the button bindings
-    //configureButtonBindings();
+    configureButtonBindings();
   }
 
   /** because its a singleton */
@@ -60,8 +61,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
     
     JoystickButton square = new JoystickButton(m_controller, 1);
-    
-    square.whenPressed(new TeleopDrive(m_DriveSubsystem, 0, 0.41));
+    square.whileHeld(new TeleopDriveForever(m_driveSubsystem, 0.41, 0.41));
+
+    JoystickButton cross = new JoystickButton(m_controller, 2);
+    cross.whenPressed(new TeleopDriveCheckButton(m_driveSubsystem, 0.81, 0.81));
   }
 
   /**
@@ -72,5 +75,9 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
+  }
+
+  public boolean getControllerCross(){
+    return m_controller.getCrossButton();
   }
 }

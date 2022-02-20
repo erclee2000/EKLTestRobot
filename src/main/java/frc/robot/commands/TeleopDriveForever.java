@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
 import org.opencv.core.RotatedRect;
@@ -11,7 +12,7 @@ import org.opencv.core.RotatedRect;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class TeleopDrive extends CommandBase {
+public class TeleopDriveForever extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSubsystem m_subsystem;
 
@@ -22,7 +23,7 @@ public class TeleopDrive extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TeleopDrive(DriveSubsystem subsystem, double speed, double rotation) {
+  public TeleopDriveForever(DriveSubsystem subsystem, double speed, double rotation) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
