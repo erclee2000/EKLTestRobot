@@ -1,0 +1,53 @@
+//psuedocode for indexer subsystem assuming 3 storage locations mag, tower, chamber
+
+ballCount = 0; //initial state
+
+if(ballCount == 0){
+    if(breakBeam1 Triggered == true){ //got a new ball
+        turn on index1 and index 2 until breakBeam3 //move new ball all the way to chamber
+        ballCount++;
+        /* now in one ball state = ball in chamber */
+    }
+    if(shotButtonPressed()){
+        //rumble controller to tell driver chamber is empty or other notification     
+    }
+}
+
+if(ballCount == 1){
+    if(breakBeam1 Triggered == true){ //got a new ball
+        /* have two balls now */
+        turn on index1 and index2 on until breakBeam2 // move new ball to tower
+        ballCount++
+        /* now in two ball state = one in tower, one in chamber */
+    }
+
+    if(shotButtonPressed()){
+        shoot();
+        ballCount--;
+        /* now in zero ball state */
+    }
+}
+
+if(ballCount == 2){
+    if(breakBeam1 Triggered == true){ //got a new ball
+        /* have three balls now -- error state */
+        shoot() //immediately shoot one in chamber to reduce to two
+        turn index2 on until breakBeam3 //move ball from tower to chamber
+        turn index1 on until breakBeam2 //move new ball to tower
+        /* now in two ball state = one in tower, one in chamber */
+    }
+
+    if(shotButtonPressed()){
+        shoot();
+        ballCount--;
+        turn index2 on until breakBeam3; // move ball tower to chamber
+        /* now one ball state = ball in chamber */
+    }
+}
+
+
+
+
+
+
+/* from joseph/alexa/nico 02.21.22 */

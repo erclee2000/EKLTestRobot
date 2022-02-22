@@ -3,15 +3,13 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-import java.util.DoubleSummaryStatistics;
 import java.util.function.DoubleSupplier;
 
 import frc.robot.subsystems.DriveSubsystem;
-import org.opencv.core.RotatedRect;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class TeleopDriveDubSup extends CommandBase {
+public class TeleopDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSubsystem m_subsystem;
 
@@ -22,7 +20,7 @@ public class TeleopDriveDubSup extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TeleopDriveDubSup(DriveSubsystem subsystem, DoubleSupplier speed, DoubleSupplier rotation) {
+  public TeleopDrive(DriveSubsystem subsystem, DoubleSupplier speed, DoubleSupplier rotation) {
     m_subsystem = subsystem;
     m_speed = speed;
     m_rotation = rotation;
