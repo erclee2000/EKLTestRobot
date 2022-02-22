@@ -3,51 +3,52 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-import java.util.DoubleSummaryStatistics;
-import java.util.function.DoubleSupplier;
-
-import frc.robot.subsystems.DriveSubsystem;
-import org.opencv.core.RotatedRect;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class TeleopDriveDubSup extends CommandBase {
+public class FrontIntake extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveSubsystem m_subsystem;
+  private final Intake m_subsystem;
 
-  private DoubleSupplier m_speed;
-  private DoubleSupplier m_rotation;
+  private static double timesScheduled = 0.0;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TeleopDriveDubSup(DriveSubsystem subsystem, DoubleSupplier speed, DoubleSupplier rotation) {
+  public FrontIntake(Intake subsystem) {
     m_subsystem = subsystem;
-    m_speed = speed;
-    m_rotation = rotation;
+    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
-  }
+    }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_subsystem.frontOff();
+    timesScheduled++;
+    System.out.println("in frontinatke's intialize " + timesScheduled);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.activateDifferentialDrive(-m_speed.getAsDouble(), m_rotation.getAsDouble());
-    System.out.println("executing activateDifferentialDrive " + m_speed.getAsDouble() + " " + m_rotation.getAsDouble());
+    m_subsystem.frontOn();
+    System.out.println("in frontinatke's execute");
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_subsystem.frontOff();
+    System.out.println("in frontinatke's end");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+     return true;
   }
 }

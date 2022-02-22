@@ -22,7 +22,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 */
 
 
-public class DriveSubsystem extends SubsystemBase {
+public class Drive extends SubsystemBase {
   /*
   private CANSparkMax leftMotorController1 = new CANSparkMax(0);
   private CANSparkMax leftMotorController2 = new CANSparkMax(1);
@@ -38,7 +38,7 @@ private PWMSparkMax rightMotorController2 = new PWMSparkMax(3);
   private MotorController rightMotorControllerGroup = new MotorControllerGroup(rightMotorController1, rightMotorController2);
   private DifferentialDrive m_DifferentialDrive = new DifferentialDrive(leftMotorControllerGroup, rightMotorControllerGroup);
   
-  public DriveSubsystem() {
+  public Drive() {
   
   }
 
@@ -52,7 +52,7 @@ private PWMSparkMax rightMotorController2 = new PWMSparkMax(3);
     // This method will be called once per scheduler run during simulation
   }
 
-  //an accessor method to m_differntialDrive
+  //an accessor method to m_differntialDrive object
   public void activateDifferentialDrive(double speed, double rotation){
     m_DifferentialDrive.arcadeDrive(speed, rotation);
   }
