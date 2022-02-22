@@ -9,18 +9,12 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
-      "/LiveWindow/DriveSubsystem": "Subsystem",
-      "/LiveWindow/ExampleSubsystem": "Subsystem",
+      "/LiveWindow/Drive": "Subsystem",
       "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
-<<<<<<< Updated upstream
-      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
-=======
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
-      "/SmartDashboard/DriveSubsystem": "Subsystem",
-      "/SmartDashboard/Intake": "Subsystem",
-      "/SmartDashboard/TeleopDriveForever": "Command"
->>>>>>> Stashed changes
+      "/SmartDashboard/Drive": "Subsystem",
+      "/SmartDashboard/Intake": "Subsystem"
     }
   }
 }
