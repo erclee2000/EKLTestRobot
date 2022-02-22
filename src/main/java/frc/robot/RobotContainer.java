@@ -30,7 +30,7 @@ public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
   
   // The robot's subsystems
-  //private final Drive m_driveSubsystem = new Drive();  
+  private final Drive m_driveSubsystem = new Drive();  
   private final Intake m_intake = new Intake();  
 
   // The robot's commands
@@ -45,13 +45,13 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   private RobotContainer() {
     //set each subsystem's default command
-    //m_driveSubsystem.setDefaultCommand(new TeleopDrive(m_driveSubsystem, m_controller::getLeftY, m_controller::getLeftX));
+    m_driveSubsystem.setDefaultCommand(new TeleopDrive(m_driveSubsystem, m_controller::getLeftY, m_controller::getLeftX));
 
     // Configure the button bindings
     configureButtonBindings();
 
     // put some stuff on the shuffleboard
-    //SmartDashboard.putData(m_driveSubsystem);
+    SmartDashboard.putData(m_driveSubsystem);
     SmartDashboard.putData(m_intake);
     
   }
@@ -73,19 +73,10 @@ public class RobotContainer {
     JoystickButton cross = new JoystickButton(m_controller, 2);
     JoystickButton circle = new JoystickButton(m_controller, 3);
 
-    /* three ways to do a similar thing */
-    /* option 1: repeat sched/unsched--too quick to register speed on sim 
-    square.whileHeld(new FrontIntake(m_intake));
-    */
-
-    /* option 2: direct call the methods of the command */ 
     square.whenPressed(() -> m_frontIntake.initialize());
     square.whileHeld(() -> m_frontIntake.execute());
     square.whenReleased(() -> m_frontIntake.end(false)); 
     
-    /* option 3: create accessor to the button, then check button in command 
-    square.whileHeld(m_frontIntake);
-    */
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -96,9 +87,4 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }
-
-  public boolean getSquareButton(){
-    return m_controller.getSquareButton();
-  }
-
 }
