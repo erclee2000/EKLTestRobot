@@ -30,7 +30,7 @@ public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
   
   // The robot's subsystems
-  //private final Drive m_driveSubsystem = new Drive();  
+  private final Drive m_driveSubsystem = new Drive();  
   private final Intake m_intake = new Intake();  
 
   // The robot's commands
@@ -45,13 +45,13 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   private RobotContainer() {
     //set each subsystem's default command
-    //m_driveSubsystem.setDefaultCommand(new TeleopDrive(m_driveSubsystem, m_controller::getLeftY, m_controller::getLeftX));
+    m_driveSubsystem.setDefaultCommand(new TeleopDrive(m_driveSubsystem, m_controller::getLeftY, m_controller::getLeftX));
 
     // Configure the button bindings
     configureButtonBindings();
 
     // put some stuff on the shuffleboard
-    //SmartDashboard.putData(m_driveSubsystem);
+    SmartDashboard.putData(m_driveSubsystem);
     SmartDashboard.putData(m_intake);
     
   }
