@@ -1,5 +1,4 @@
 //psuedocode for indexer subsystem assuming 3 storage locations mag, tower, chamber
-
 ballCount = 0; //initial state
 
 if(ballCount == 0){
@@ -45,11 +44,6 @@ if(ballCount == 2){
     }
 }
 
-
-
-
-
-
 /* from joseph/alexa/nico 02.21.22 */
 if ballcount = 0
     if breakBeam1 Triggered 
@@ -58,3 +52,15 @@ if ballcount = 0
 if ballcount = 1
     if breakBeam1 Triggered && breakBeam3 NOT Triggered
         run indexer1, index2 until breakBeam3 Triggered
+
+
+/* EKL on 22.02.23 */
+if breakbeam3 (top of tower) is cut //have ball in chamber
+    indexer1 off
+    indexer2 off
+else
+    while X button held //load ball in chamber
+        intake1 on
+        indexer1 on
+        indexer2 on 
+
