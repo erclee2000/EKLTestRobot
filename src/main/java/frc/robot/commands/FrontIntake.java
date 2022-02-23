@@ -49,9 +49,6 @@ public class FrontIntake extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(RobotContainer.getInstance().getSquareButton()){
-      return false;
-    }
-    return true;
+      return false; //should be set to false for whileHeld(); magically flips to true whenReleased()
   }
 }

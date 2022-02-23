@@ -73,19 +73,11 @@ public class RobotContainer {
     JoystickButton cross = new JoystickButton(m_controller, 2);
     JoystickButton circle = new JoystickButton(m_controller, 3);
 
-    /* three ways to do a similar thing */
-    /* option 1: repeat sched/unsched--too quick to register speed on sim 
-    square.whileHeld(new FrontIntake(m_intake));
-    */
-
-    /* option 2: direct call the methods of the command */ 
-    square.whenPressed(() -> m_frontIntake.initialize());
-    square.whileHeld(() -> m_frontIntake.execute());
-    square.whenReleased(() -> m_frontIntake.end(false)); 
     
-    /* option 3: create accessor to the button, then check button in command 
-    square.whileHeld(m_frontIntake);
-    */
+    //if command is set to return false in isFinished(), same command continues to run
+    //if command is set to return true in isFinished(), new command repeatedly scheduled  
+    square.whileHeld(new FrontIntake(m_intake));    
+
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -97,8 +89,10 @@ public class RobotContainer {
     return m_autoCommand;
   }
 
+  /* probably delete
   public boolean getSquareButton(){
     return m_controller.getSquareButton();
   }
+  */
 
 }
