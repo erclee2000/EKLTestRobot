@@ -49,6 +49,9 @@ public class FrontIntake extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-     return true;
-  }
+    // should be set to FALSE for whileHeld() 
+    // whileHeld() calls CommandScheduler's cancel() when button is false
+    // that cancel() calls command.end()
+      return false; 
+    }
 }

@@ -73,10 +73,11 @@ public class RobotContainer {
     JoystickButton cross = new JoystickButton(m_controller, 2);
     JoystickButton circle = new JoystickButton(m_controller, 3);
 
-    square.whenPressed(() -> m_frontIntake.initialize());
-    square.whileHeld(() -> m_frontIntake.execute());
-    square.whenReleased(() -> m_frontIntake.end(false)); 
     
+    //if command is set to return false in isFinished(), same command continues to run
+    //if command is set to return true in isFinished(), new command repeatedly scheduled  
+    square.whileHeld(new FrontIntake(m_intake));    
+
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -87,4 +88,11 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }
+
+  /* probably delete
+  public boolean getSquareButton(){
+    return m_controller.getSquareButton();
+  }
+  */
+
 }
